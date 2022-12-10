@@ -1,0 +1,70 @@
+<div class="container mob-table" *ngIf="mobiles; else err">
+
+    <div class="headers">
+
+        <h2 class="table-title">manage Mobile</h2>
+        <button class="btn btn-success" (click)="openForm(y)"#y>Add mobile</button>
+
+    </div>
+    <table class="table">
+        <thead class="head">
+            <tr>
+                <th>Mobile Name</th>
+                <th>RAM</th>
+                <th>Storage</th>
+                <th>Price(Rs)</th>
+                <th></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody class="text-center" >
+            <tr *ngFor="let mobile of mobiles">
+                <td>{{mobile['name']}}</td>
+                <td>{{mobile['ram']}}</td>
+                <td>{{mobile['storage']}}</td>
+                <td>{{mobile['price']}}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="openForm(x)" #x>Edit</button>
+                </td>
+                <td>
+                    <button class="btn btn-danger" (click)="deleteMobiles(mobile['id'])">Delete</button>
+                </td>
+            </tr>
+
+
+        </tbody>
+    </table>
+</div>
+
+<div>
+    <ng-template #err>
+       <p class="text-danger"> error fetching data...</p>
+    </ng-template>
+</div>
+
+<div class="form-wrapper" *ngIf="showForm">
+<div class="mobile-form">
+        <h2 class="text-center text-info">{{formHeader}}</h2>
+    
+    <div class="group">
+        <label for="name">Name:</label>
+        <input type="text" class="form-control" [(ngModel)]="mobileName" name="name"  required >
+    </div>
+    <div class="group">
+        <label for="price">Price</label>
+        <input type="text" class="form-control" [(ngModel)]="price" name="price" required >
+    </div>
+    <div class="group">
+        <label for="ram">RAM</label>
+        <input type="text" class="form-control" [(ngModel)]="ram" name="ram" required >
+    </div>
+    <div class="group">
+        <label for="storage">Storage</label>
+        <input type="text" class="form-control" [(ngModel)]="storage" name="storage" required >
+    </div>
+    <div class=" action">
+        <button class="btn btn-primary save" (click)="saveMobile()"> Save</button>
+        <button class="btn btn-danger cancel" (click)="closeForm()">Cancel</button>.
+    </div>
+</div>
+</div>
